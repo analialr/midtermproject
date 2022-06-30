@@ -13,13 +13,13 @@ public class CheckingAccount extends Account{
     public static final int MIN_AGE = 24;
 
     @Embedded
-    private Money monthlyMaintenanceFee;
+    private static final Money monthlyMaintenanceFee = new Money(new BigDecimal(12));
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "amount", column = @Column(name = "minimum_balance_amount")),
             @AttributeOverride(name = "currency",column = @Column(name = "minimum_balance_currency"))
     })
-    private Money minimumBalance;
+    private static final Money minimumBalance = new Money(new BigDecimal(250));
     private String secretKey;
     private Date creationDate;
     @Enumerated(EnumType.STRING)
@@ -28,20 +28,19 @@ public class CheckingAccount extends Account{
     public CheckingAccount() {
     }
 
+    public CheckingAccount(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Date creationDate, Status status) {
+        super(balance, primaryOwner, secondaryOwner);
+        this.secretKey = secretKey;
+        this.creationDate = creationDate;
+        this.status = status;
+    }
+
     public Money getMonthlyMaintenanceFee() {
         return monthlyMaintenanceFee;
     }
 
-    public void setMonthlyMaintenanceFee(Money monthlyMaintenanceFee) {
-        this.monthlyMaintenanceFee = monthlyMaintenanceFee;
-    }
-
     public Money getMinimum_balance() {
         return minimumBalance;
-    }
-
-    public void setMinimum_balance(Money minimum_balance) {
-        this.minimumBalance = minimum_balance;
     }
 
     public String getSecretKey() {

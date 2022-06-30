@@ -1,5 +1,6 @@
 package models;
 
+import classes.Money;
 import enums.Status;
 import models.Account;
 
@@ -17,9 +18,11 @@ public class StudentCheckingAccount extends Account {
     public StudentCheckingAccount() {
     }
 
-    public StudentCheckingAccount(String secretKey, Date creationDate) {
+    public StudentCheckingAccount(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Date creationDate, Status status) {
+        super(balance, penaltyFee, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.creationDate = creationDate;
+        this.status = status;
     }
 
     public String getSecretKey() {

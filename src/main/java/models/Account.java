@@ -22,7 +22,7 @@ public abstract class Account {
             @AttributeOverride(name = "amount", column = @Column(name = "penaltyFee_amount")),
             @AttributeOverride(name = "currency",column = @Column(name = "penaltyFee_currency"))
     })
-    private Money penaltyFee;
+    private static final Money penaltyFee = new Money(new BigDecimal(40));
     @ManyToOne
     @JoinColumn(name = "primary_owner_id")
     private AccountHolder primaryOwner;
@@ -36,7 +36,6 @@ public abstract class Account {
 
     public Account(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
         this.balance = balance;
-        this.penaltyFee = penaltyFee;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
     }
