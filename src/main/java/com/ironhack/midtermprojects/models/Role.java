@@ -1,4 +1,4 @@
-package models;
+package com.ironhack.midtermprojects.models;
 
 import javax.persistence.*;
 

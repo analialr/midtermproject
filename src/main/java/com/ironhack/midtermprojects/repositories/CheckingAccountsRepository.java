@@ -1,6 +1,6 @@
-package repositories;
+package com.ironhack.midtermprojects.repositories;
 
-import models.CheckingAccount;
+import com.ironhack.midtermprojects.models.CheckingAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

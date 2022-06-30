@@ -1,6 +1,6 @@
-package models;
+package com.ironhack.midtermprojects.models;
 
-import classes.Money;
+import com.ironhack.midtermprojects.classes.Money;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -44,9 +44,7 @@ public abstract class Account {
         return balance;
     }
 
-    public void setBalance(Money balance) {
-        this.balance = balance;
-    }
+    public void setBalance(Money balance) { this.balance = balance; }
 
     public Money getPenaltyFee() {
         return penaltyFee;

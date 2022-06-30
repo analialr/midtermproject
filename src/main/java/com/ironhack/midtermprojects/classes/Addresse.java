@@ -1,4 +1,4 @@
-package classes;
+package com.ironhack.midtermprojects.classes;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

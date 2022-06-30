@@ -1,14 +1,8 @@
 package com.ironhack.midtermprojects.models;
 import static org.junit.jupiter.api.Assertions.*;
 
-import models.AccountHolder;
-import models.CheckingAccount;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 @SpringBootTest
 public class AccountHoldersTests {

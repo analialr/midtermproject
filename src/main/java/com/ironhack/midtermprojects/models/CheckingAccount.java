@@ -1,7 +1,7 @@
-package models;
+package com.ironhack.midtermprojects.models;
 
-import classes.Money;
-import enums.Status;
+import com.ironhack.midtermprojects.classes.Money;
+import com.ironhack.midtermprojects.enums.Status;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -33,6 +33,14 @@ public class CheckingAccount extends Account{
         this.secretKey = secretKey;
         this.creationDate = creationDate;
         this.status = status;
+    }
+
+    @Override
+    public void setBalance(Money new_balance){
+        if (super.getBalance().getAmount().compareTo(this.getMinimum_balance().getAmount()) > 0){
+            new_balance.decreaseAmount(this.getPenaltyFee());
+        }
+        super.setBalance(new_balance);
     }
 
     public Money getMonthlyMaintenanceFee() {

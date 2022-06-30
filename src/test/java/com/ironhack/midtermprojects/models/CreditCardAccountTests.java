@@ -1,8 +1,6 @@
 package com.ironhack.midtermprojects.models;
 
-import classes.Money;
-import models.AccountHolder;
-import models.CreditCardAccount;
+import com.ironhack.midtermprojects.classes.Money;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;

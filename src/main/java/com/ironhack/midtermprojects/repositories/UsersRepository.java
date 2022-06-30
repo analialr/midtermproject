@@ -1,6 +1,6 @@
-package repositories;
+package com.ironhack.midtermprojects.repositories;
 
-import models.User;
+import com.ironhack.midtermprojects.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

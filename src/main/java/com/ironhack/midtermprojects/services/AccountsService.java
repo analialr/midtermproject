@@ -1,15 +1,15 @@
-package services;
+package com.ironhack.midtermprojects.services;
 
-import classes.Money;
-import enums.Status;
-import models.Account;
-import models.AccountHolder;
-import models.CheckingAccount;
-import models.StudentCheckingAccount;
+import com.ironhack.midtermprojects.classes.Money;
+import com.ironhack.midtermprojects.enums.Status;
+import com.ironhack.midtermprojects.models.Account;
+import com.ironhack.midtermprojects.models.AccountHolder;
+import com.ironhack.midtermprojects.models.CheckingAccount;
+import com.ironhack.midtermprojects.models.StudentCheckingAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositories.CheckingAccountsRepository;
-import repositories.StudentCheckingAccountsRepository;
+import com.ironhack.midtermprojects.repositories.CheckingAccountsRepository;
+import com.ironhack.midtermprojects.repositories.StudentCheckingAccountsRepository;
 
 import java.util.Date;
 

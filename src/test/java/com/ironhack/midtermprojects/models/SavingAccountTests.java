@@ -1,9 +1,7 @@
 package com.ironhack.midtermprojects.models;
 
-import classes.Money;
-import enums.Status;
-import models.AccountHolder;
-import models.SavingAccount;
+import com.ironhack.midtermprojects.classes.Money;
+import com.ironhack.midtermprojects.enums.Status;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;

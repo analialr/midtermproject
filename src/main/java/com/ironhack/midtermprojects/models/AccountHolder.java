@@ -1,4 +1,4 @@
-package models;
+package com.ironhack.midtermprojects.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -9,12 +9,11 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "user_id")
 public class AccountHolder extends User {
-
-    private String name;
     private Date birthDate;
 
     @OneToMany(mappedBy = "primaryOwner")
@@ -29,27 +28,17 @@ public class AccountHolder extends User {
     public AccountHolder() {
     }
 
-    public AccountHolder(String name, Date birthDate) {
-        this.name = name;
-        this.birthDate = birthDate;
-    }
-
-    public AccountHolder(String name, Date birthDate, List<Account> primaryAccountList, List<Account> secondaryAccountList) {
-        this.name = name;
+    public AccountHolder(String name, String username, String password, Set<Role> roles, Date birthDate, List<Account> primaryAccountList, List<Account> secondaryAccountList) {
+        super(name, username, password, roles);
         this.birthDate = birthDate;
         this.primaryAccountList = primaryAccountList;
         this.secondaryAccountList = secondaryAccountList;
     }
 
-
-
-    public String getName() {
-        return name;
-    }
-
-
-    public void setName(String name) {
-        this.name = name;
+    public AccountHolder(String name, String username, String password, Set<Role> roles, Date birthDate, List<Account> primaryAccountList) {
+        super(name, username, password, roles);
+        this.birthDate = birthDate;
+        this.primaryAccountList = primaryAccountList;
     }
 
     public Date getBirthDate() {

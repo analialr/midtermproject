@@ -1,7 +1,7 @@
-package models;
+package com.ironhack.midtermprojects.models;
 
-import classes.Money;
-import enums.Status;
+import com.ironhack.midtermprojects.classes.Money;
+import com.ironhack.midtermprojects.enums.Status;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
