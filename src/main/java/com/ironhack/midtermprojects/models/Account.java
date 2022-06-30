@@ -16,7 +16,7 @@ public abstract class Account {
             @AttributeOverride(name = "amount", column = @Column(name = "balance_amount")),
             @AttributeOverride(name = "currency",column = @Column(name = "balance_currency"))
     })
-    private Money balance;
+    private Money balance = new Money(new BigDecimal(0));
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "amount", column = @Column(name = "penaltyFee_amount")),

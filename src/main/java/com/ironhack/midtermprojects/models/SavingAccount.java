@@ -50,6 +50,14 @@ public class SavingAccount extends Account {
         this.setInterestRate(interestRate);
     }
 
+    @Override
+    public void setBalance(Money new_balance){
+        if (new_balance.getAmount().compareTo(this.getMinimumBalance().getAmount()) < 0){
+            new_balance.decreaseAmount(this.getPenaltyFee());
+        }
+        super.setBalance(new_balance);
+    }
+
     public String getSecretKey() {
         return secretKey;
     }
