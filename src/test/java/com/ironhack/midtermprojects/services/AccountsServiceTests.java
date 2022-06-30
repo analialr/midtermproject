@@ -29,7 +29,6 @@ public class AccountsServiceTests {
 
         Account account = accountsService.createCheckingAccount(
                 new Money(new BigDecimal(2.0)),//Money balance,
-                new Money(new BigDecimal(2.0)),//Money penaltyFee,
                 accountHolder,//AccountHolder primaryOwner,
                 new AccountHolder(),//AccountHolder secondaryOwner,
                 "secretKey",//String secretKey,

@@ -31,18 +31,18 @@ public class CreditCardAccount extends Account {
     public CreditCardAccount() {
     }
 
-    public CreditCardAccount(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner, BigDecimal interestRate, Money creditLimit) {
-        super(balance, penaltyFee, primaryOwner, secondaryOwner);
-        this.interestRate = interestRate;
+    public CreditCardAccount(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, BigDecimal interestRate, Money creditLimit) {
+        super(balance, primaryOwner, secondaryOwner);
+        this.setInterestRate(interestRate);
         this.setCreditLimit(creditLimit);
     }
-    public CreditCardAccount(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner, BigDecimal interestRate) {
-        super(balance, penaltyFee, primaryOwner, secondaryOwner);
+    public CreditCardAccount(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, BigDecimal interestRate) {
+        super(balance, primaryOwner, secondaryOwner);
         this.setInterestRate(interestRate);
     }
 
-    public CreditCardAccount(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money creditLimit) {
-        super(balance, penaltyFee, primaryOwner, secondaryOwner);
+    public CreditCardAccount(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money creditLimit) {
+        super(balance, primaryOwner, secondaryOwner);
         this.setCreditLimit(creditLimit);
     }
 
@@ -64,8 +64,8 @@ public class CreditCardAccount extends Account {
         return creditLimit;
     }
 
-    public void setCreditLimit(Money credit_limit) {
-        this.creditLimit = (credit_limit.getAmount().compareTo(MAX_CREDIT_LIMIT.getAmount()) > 0)
+    public void setCreditLimit(Money creditLimit) {
+        this.creditLimit = (creditLimit.getAmount().compareTo(MAX_CREDIT_LIMIT.getAmount()) > 0)
                 ? MAX_CREDIT_LIMIT
                 : creditLimit;
     }

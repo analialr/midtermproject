@@ -16,7 +16,6 @@ public class CreditCardAccountTests {
     void tooHighCreditLimit() {
         CreditCardAccount creditCardAccount = new CreditCardAccount(
                 new Money(new BigDecimal(67.9999)),
-                new Money(new BigDecimal(67.9999)),
                 new AccountHolder(),
                 new AccountHolder(),
                 new BigDecimal(67.9999),
@@ -30,20 +29,18 @@ public class CreditCardAccountTests {
     void adequateCreditLimit() {
         CreditCardAccount creditCardAccount = new CreditCardAccount(
                 new Money(new BigDecimal(67.9999)),
-                new Money(new BigDecimal(67.9999)),
                 new AccountHolder(),
                 new AccountHolder(),
                 new BigDecimal(67.9999),
-                new Money(CreditCardAccount.MAX_CREDIT_LIMIT.getAmount())
+                CreditCardAccount.MAX_CREDIT_LIMIT
         );
 
-        assertEquals(creditCardAccount.getCreditLimit().getAmount(), CreditCardAccount.MAX_CREDIT_LIMIT.getAmount());
+        assertEquals(CreditCardAccount.MAX_CREDIT_LIMIT.getAmount(), creditCardAccount.getCreditLimit().getAmount());
     }
 
     @Test
     void defaultCreditLimit() {
         CreditCardAccount creditCardAccount = new CreditCardAccount(
-                new Money(new BigDecimal(67.9999)),
                 new Money(new BigDecimal(67.9999)),
                 new AccountHolder(),
                 new AccountHolder(),
@@ -57,7 +54,6 @@ public class CreditCardAccountTests {
     void defaultInterestRate() {
         CreditCardAccount creditCardAccount = new CreditCardAccount(
                 new Money(new BigDecimal(67.9999)),
-                new Money(new BigDecimal(67.9999)),
                 new AccountHolder(),
                 new AccountHolder(),
                 new Money(new BigDecimal(67.9999))
@@ -70,7 +66,6 @@ public class CreditCardAccountTests {
     void tooHighInterestRate() {
         CreditCardAccount creditCardAccount = new CreditCardAccount(
                 new Money(new BigDecimal(67.9999)),
-                new Money(new BigDecimal(67.9999)),
                 new AccountHolder(),
                 new AccountHolder(),
                 CreditCardAccount.MAX_INTEREST_RATE.add(new BigDecimal(1.0)) // Too big interest rate
@@ -82,7 +77,6 @@ public class CreditCardAccountTests {
     @Test
     void tooLowInterestRate() {
         CreditCardAccount creditCardAccount = new CreditCardAccount(
-                new Money(new BigDecimal(67.9999)),
                 new Money(new BigDecimal(67.9999)),
                 new AccountHolder(),
                 new AccountHolder(),
@@ -97,7 +91,6 @@ public class CreditCardAccountTests {
         BigDecimal sum = CreditCardAccount.MAX_INTEREST_RATE.add(CreditCardAccount.MIN_INTEREST_RATE);
         BigDecimal adequateInterestRate = sum.divide(new BigDecimal(2)); // average between max and min allowed values
         CreditCardAccount creditCardAccount = new CreditCardAccount(
-                new Money(new BigDecimal(67.9999)),
                 new Money(new BigDecimal(67.9999)),
                 new AccountHolder(),
                 new AccountHolder(),

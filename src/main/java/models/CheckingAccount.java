@@ -28,7 +28,7 @@ public class CheckingAccount extends Account{
     public CheckingAccount() {
     }
 
-    public CheckingAccount(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Date creationDate, Status status) {
+    public CheckingAccount(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Date creationDate, Status status) {
         super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.creationDate = creationDate;

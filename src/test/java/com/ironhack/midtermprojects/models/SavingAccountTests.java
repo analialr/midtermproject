@@ -18,7 +18,6 @@ public class SavingAccountTests {
     void tooBigInterestRate() throws Exception {
         SavingAccount savingAccount = new SavingAccount(
                 new Money(new BigDecimal(67.9999)),
-                new Money(new BigDecimal(67.9999)),
                 new AccountHolder(),
                 new AccountHolder(),
                 "secretKey",
@@ -35,7 +34,6 @@ public class SavingAccountTests {
     @Test
     void adequateBigInterestRate() throws Exception {
         SavingAccount savingAccount = new SavingAccount(
-                new Money(new BigDecimal(67.9999)),
                 new Money(new BigDecimal(67.9999)),
                 new AccountHolder(),
                 new AccountHolder(),
@@ -54,7 +52,6 @@ public class SavingAccountTests {
     void tooLowMinimumBalance() throws Exception {
         SavingAccount savingAccount = new SavingAccount(
                 new Money(new BigDecimal(67.9999)),
-                new Money(new BigDecimal(67.9999)),
                 new AccountHolder(),
                 new AccountHolder(),
                 "secretKey",
@@ -72,7 +69,6 @@ public class SavingAccountTests {
     void adequateMinimumBalance() throws Exception {
         SavingAccount savingAccount = new SavingAccount(
                 new Money(new BigDecimal(67.9999)),
-                new Money(new BigDecimal(67.9999)),
                 new AccountHolder(),
                 new AccountHolder(),
                 "secretKey",
@@ -89,7 +85,6 @@ public class SavingAccountTests {
     @Test
     void defaultMinimumBalance() throws Exception {
         SavingAccount savingAccount = new SavingAccount(
-                new Money(new BigDecimal(67.9999)),
                 new Money(new BigDecimal(67.9999)),
                 new AccountHolder(),
                 new AccountHolder(),

@@ -34,7 +34,7 @@ public abstract class Account {
     public Account() {
     }
 
-    public Account(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
+    public Account(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
         this.balance = balance;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
@@ -50,10 +50,6 @@ public abstract class Account {
 
     public Money getPenaltyFee() {
         return penaltyFee;
-    }
-
-    public void setPenaltyFee(Money penaltyFee) {
-        this.penaltyFee = penaltyFee;
     }
 
     public AccountHolder getPrimaryOwner() {

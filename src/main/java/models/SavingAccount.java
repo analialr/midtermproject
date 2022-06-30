@@ -2,7 +2,6 @@ package models;
 
 import classes.Money;
 import enums.Status;
-import models.Account;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -34,8 +33,8 @@ public class SavingAccount extends Account {
     public SavingAccount() {
     }
 
-    public SavingAccount(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Money minimumBalance, Date creationDate, Status status, BigDecimal interestRate) {
-        super(balance, penaltyFee, primaryOwner, secondaryOwner);
+    public SavingAccount(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Money minimumBalance, Date creationDate, Status status, BigDecimal interestRate) {
+        super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.setMinimumBalance(minimumBalance);
         this.creationDate = creationDate;
@@ -43,8 +42,8 @@ public class SavingAccount extends Account {
         this.setInterestRate(interestRate);
     }
 
-    public SavingAccount(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Date creationDate, Status status, BigDecimal interestRate) {
-        super(balance, penaltyFee, primaryOwner, secondaryOwner);
+    public SavingAccount(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Date creationDate, Status status, BigDecimal interestRate) {
+        super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.creationDate = creationDate;
         this.status = status;

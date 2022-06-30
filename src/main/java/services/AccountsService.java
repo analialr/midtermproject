@@ -22,13 +22,13 @@ public class AccountsService {
     private StudentCheckingAccountsRepository studentCheckingAccountsRepository;
 
 
-    public Account createCheckingAccount(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Date creationDate, Status status) {
+    public Account createCheckingAccount(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Date creationDate, Status status) {
         if(primaryOwner.getAge() >= CheckingAccount.MIN_AGE){
-            CheckingAccount account = new CheckingAccount(balance, penaltyFee, primaryOwner, secondaryOwner, secretKey, creationDate, status);
+            CheckingAccount account = new CheckingAccount(balance, primaryOwner, secondaryOwner, secretKey, creationDate, status);
             checkingAccountsRepository.save(account);
             return account;
         }else {
-            StudentCheckingAccount account = new StudentCheckingAccount(balance, penaltyFee, primaryOwner, secondaryOwner, secretKey, creationDate, status);
+            StudentCheckingAccount account = new StudentCheckingAccount(balance, primaryOwner, secondaryOwner, secretKey, creationDate, status);
             studentCheckingAccountsRepository.save(account);
             return account;
         }

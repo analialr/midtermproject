@@ -2,7 +2,6 @@ package models;
 
 import classes.Money;
 import enums.Status;
-import models.Account;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,8 +17,8 @@ public class StudentCheckingAccount extends Account {
     public StudentCheckingAccount() {
     }
 
-    public StudentCheckingAccount(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Date creationDate, Status status) {
-        super(balance, penaltyFee, primaryOwner, secondaryOwner);
+    public StudentCheckingAccount(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Date creationDate, Status status) {
+        super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.creationDate = creationDate;
         this.status = status;
