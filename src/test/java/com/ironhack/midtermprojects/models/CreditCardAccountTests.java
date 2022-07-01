@@ -1,11 +1,15 @@
 package com.ironhack.midtermprojects.models;
 
 import com.ironhack.midtermprojects.classes.Money;
+import com.ironhack.midtermprojects.enums.Status;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 @SpringBootTest
 public class CreditCardAccountTests {
@@ -96,5 +100,30 @@ public class CreditCardAccountTests {
         );
 
         assertEquals(creditCardAccount.getInterestRate(), adequateInterestRate);
+    }
+
+
+    @Test
+    void interestIsUpdatedOnGetBalanceAfterMonth() {
+        BigDecimal balance_before = new BigDecimal(1000000);
+
+        CreditCardAccount creditCardAccount = new CreditCardAccount(
+            new Money(balance_before),//Money balance
+            new AccountHolder(),//, AccountHolder primaryOwner,
+            null,// AccountHolder secondaryOwner,
+            CreditCardAccount.MAX_INTEREST_RATE// BigDecimal interestRate,
+        );
+        creditCardAccount.setCreationDate(getDateMinusMonths(2));
+
+        BigDecimal balance_after = creditCardAccount.getBalance().getAmount();
+        assertNotNull(creditCardAccount.getInterestUpdatedAt());
+        assertTrue(balance_after.compareTo(balance_before) > 0);
+    }
+
+
+    private Date getDateMinusMonths(int months){
+        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime newDateTime = dateTime.minusMonths(months);
+        return Date.from(newDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 }
