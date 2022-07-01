@@ -5,6 +5,8 @@ import com.ironhack.midtermprojects.enums.Status;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -93,8 +95,33 @@ public class SavingAccountTests {
         );
 
         assertEquals(savingAccount.getMinimumBalance().getAmount(), SavingAccount.DEFAULT_BALANCE.getAmount());
-
     }
 
+
+    @Test
+    void interestIsUpdatedOnGetBalanceAfterYear() {
+        BigDecimal balance_before = new BigDecimal(1000000);
+
+        SavingAccount savingAccount = new SavingAccount(
+                new Money(balance_before),//Money balance
+                new AccountHolder(),//, AccountHolder primaryOwner,
+                null,// AccountHolder secondaryOwner,
+                "secretKey",// String secretKey,
+                getDateMinusYears(2),// Date creationDate,
+                Status.ACTIVE,// Status status,
+                SavingAccount.MAXIMUM_INTEREST_RATE// BigDecimal interestRate
+        );
+
+        BigDecimal balance_after = savingAccount.getBalance().getAmount();
+        assertNotNull(savingAccount.getInterestUpdatedAt());
+        assertTrue(balance_after.compareTo(balance_before) > 0);
+    }
+
+
+    private Date getDateMinusYears(int years){
+        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime newDateTime = dateTime.minusYears(years);
+        return Date.from(newDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
 
 }

@@ -5,6 +5,9 @@ import com.ironhack.midtermprojects.enums.Status;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Entity
@@ -12,6 +15,8 @@ import java.util.Date;
 public class SavingAccount extends Account {
     @Transient
     public static final BigDecimal MAXIMUM_INTEREST_RATE = new BigDecimal(0.5);
+    @Transient
+    public static final BigDecimal DEFAULT_INTEREST_RATE = new BigDecimal(0.0025);
     @Transient
     public static final Money MINIMUM_BALANCE = new Money(new BigDecimal(100));
     @Transient
@@ -24,13 +29,16 @@ public class SavingAccount extends Account {
             @AttributeOverride(name = "currency",column = @Column(name = "minimum_balance_currency"))
     })
     private Money minimumBalance = DEFAULT_BALANCE;
-    private Date creationDate;
+    private Date creationDate = new Date();
     @Enumerated(EnumType.STRING)
     private Status status;
-    private BigDecimal interestRate = new BigDecimal(0.0025);
+    private BigDecimal interestRate = DEFAULT_INTEREST_RATE;
+
+    private Date interestUpdatedAt;
 
 
     public SavingAccount() {
+
     }
 
     public SavingAccount(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Money minimumBalance, Date creationDate, Status status, BigDecimal interestRate) {
@@ -56,6 +64,12 @@ public class SavingAccount extends Account {
             new_balance.decreaseAmount(this.getPenaltyFee());
         }
         super.setBalance(new_balance);
+    }
+
+    @Override
+    public Money getBalance(){
+        this.updateInterest();
+        return super.getBalance();
     }
 
     public String getSecretKey() {
@@ -100,5 +114,29 @@ public class SavingAccount extends Account {
         this.interestRate = (interestRate.compareTo(MAXIMUM_INTEREST_RATE) > 0)
                 ? MAXIMUM_INTEREST_RATE
                 : interestRate;
+    }
+
+    public Date getInterestUpdatedAt() {
+        return interestUpdatedAt;
+    }
+
+    public void setInterestUpdatedAt(Date interestUpdatedAt) {
+        this.interestUpdatedAt = interestUpdatedAt;
+    }
+
+    public void updateInterest(){
+        if(this.getInterestUpdatedAt() == null){
+            this.interestUpdatedAt = this.creationDate;
+        }
+        LocalDate today = LocalDate.now();
+        LocalDate lastUpdate = this.getInterestUpdatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        int yearsSinceLastInterestUpdate = Period.between(lastUpdate, today).getYears();
+
+        if(yearsSinceLastInterestUpdate >= 1) {
+            BigDecimal interest = super.getBalance().getAmount().multiply(this.getInterestRate()).multiply(BigDecimal.valueOf(yearsSinceLastInterestUpdate));
+            this.setBalance(new Money(super.getBalance().getAmount().add(interest)));
+            this.setInterestUpdatedAt(new Date());
+        }
     }
 }

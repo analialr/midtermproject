@@ -4,15 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.ironhack.midtermprojects.classes.Money;
 import com.ironhack.midtermprojects.enums.Status;
 import com.ironhack.midtermprojects.models.*;
-import com.ironhack.midtermprojects.repositories.AccountHolderRepository;
+import com.ironhack.midtermprojects.repositories.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.ironhack.midtermprojects.repositories.CheckingAccountsRepository;
-import com.ironhack.midtermprojects.repositories.StudentCheckingAccountsRepository;
-import com.ironhack.midtermprojects.repositories.UsersRepository;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -30,9 +27,10 @@ public class AccountsServiceTests {
     private AccountsService accountsService;
     @Autowired
     private CheckingAccountsRepository checkingAccountsRepository;
-
     @Autowired
     private StudentCheckingAccountsRepository studentCheckingAccountsRepository;
+    @Autowired
+    private SavingAccountsRepository savingAccountsRepository;
 
     @BeforeEach
     void setUp() {
@@ -44,6 +42,7 @@ public class AccountsServiceTests {
     void tearDown() {
         checkingAccountsRepository.deleteAll();
         studentCheckingAccountsRepository.deleteAll();
+        savingAccountsRepository.deleteAll();
         accountHolderRepository.deleteAll();
     }
 
@@ -84,4 +83,5 @@ public class AccountsServiceTests {
         assertTrue(account.getPrimaryOwner().getAge() < CheckingAccount.MIN_AGE);
         assertEquals(account.getClass(), StudentCheckingAccount.class);
     }
+
 }
