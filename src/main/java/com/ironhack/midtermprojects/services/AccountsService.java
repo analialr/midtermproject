@@ -43,4 +43,13 @@ public class AccountsService {
     }
 
 
+    public Money getSavingAccountBalance(Long account_id) {
+        Optional<SavingAccount> account = savingAccountsRepository.findById(account_id);
+        if(account.isPresent()){
+            return account.get().getBalance();
+        } else {
+            return null;
+        }
+    }
+
 }
