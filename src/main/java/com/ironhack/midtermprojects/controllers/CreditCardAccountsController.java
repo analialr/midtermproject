@@ -6,10 +6,7 @@ import com.ironhack.midtermprojects.repositories.CreditCardAccountsRepository;
 import com.ironhack.midtermprojects.services.AccountsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,5 +28,11 @@ public class CreditCardAccountsController {
     @ResponseStatus(HttpStatus.OK)
     public Money getBalance(@PathVariable(name="account_id") Long account_id) {
         return accountsService.getCreditCardAccountBalance(account_id);
+    }
+
+    @PatchMapping("/credit-card-accounts/{account_id}/balance/{balance}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateBalance(@PathVariable(name="account_id") Long account_id, @PathVariable(name="balance") Integer balance) {
+        accountsService.updateCreditCardAccountBalance(account_id, balance);
     }
 }

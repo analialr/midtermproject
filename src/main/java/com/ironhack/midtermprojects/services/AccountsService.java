@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ironhack.midtermprojects.repositories.CheckingAccountsRepository;
 import com.ironhack.midtermprojects.repositories.StudentCheckingAccountsRepository;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Optional;
 
@@ -67,9 +68,54 @@ public class AccountsService {
         }
     }
 
+
     public Money getCreditCardAccountBalance(Long account_id) {
         Optional<CreditCardAccount> account = creditCardAccountsRepository.findById(account_id);
         if(account.isPresent()){
+            return account.get().getBalance();
+        } else {
+            return null;
+        }
+    }
+
+    public Money updateStudentCheckingAccountBalance(Long account_id, Integer balance) {
+        Optional<StudentCheckingAccount> account = studentCheckingAccountsRepository.findById(account_id);
+        if(account.isPresent()){
+            account.get().setBalance(new Money(new BigDecimal(balance)));
+            studentCheckingAccountsRepository.save(account.get());
+            return account.get().getBalance();
+        } else {
+            return null;
+        }
+    }
+
+    public Money updateCheckingAccountBalance(Long account_id, Integer balance) {
+        Optional<CheckingAccount> account = checkingAccountsRepository.findById(account_id);
+        if(account.isPresent()){
+            account.get().setBalance(new Money(new BigDecimal(balance)));
+            checkingAccountsRepository.save(account.get());
+            return account.get().getBalance();
+        } else {
+            return null;
+        }
+    }
+
+    public Money updateSavingAccountBalance(Long account_id, Integer balance) {
+        Optional<SavingAccount> account = savingAccountsRepository.findById(account_id);
+        if(account.isPresent()){
+            account.get().setBalance(new Money(new BigDecimal(balance)));
+            savingAccountsRepository.save(account.get());
+            return getSavingAccountBalance(account.get().getId());
+        } else {
+            return null;
+        }
+    }
+
+    public Money updateCreditCardAccountBalance(Long account_id, Integer balance) {
+        Optional<CreditCardAccount> account = creditCardAccountsRepository.findById(account_id);
+        if(account.isPresent()){
+            account.get().setBalance(new Money(new BigDecimal(balance)));
+            creditCardAccountsRepository.save(account.get());
             return account.get().getBalance();
         } else {
             return null;
