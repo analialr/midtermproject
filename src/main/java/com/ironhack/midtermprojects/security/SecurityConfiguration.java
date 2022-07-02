@@ -19,7 +19,15 @@ public class SecurityConfiguration {
         http.csrf().disable(); // Desactivamos la protección CSRF porque nosotros no vamos a manejar el HTML
         http.authorizeRequests() // Vamos a estacler la protección de cada endpoint individualmente
                 //.antMatchers(HttpMethod.GET, "/hello-world", "/hello-user").authenticated() // solo usuarios autenticados
-                .antMatchers(HttpMethod.GET, "/saving-accounts/**").hasRole("ADMIN") // Solo ADMIN
+
+                // Solo ADMIN
+                .antMatchers(HttpMethod.GET,
+                        "/saving-accounts/**",
+                        "/credit-card-accounts/**",
+                        "/checking-accounts/**",
+                        "/student-checking-accounts/**"
+                ).hasRole("ADMIN")
+
                 //.antMatchers(HttpMethod.POST, "/hello-post").hasAnyRole("ACCOUNT-HOLDER") // Solo ADMIN y TECHNICIAN
                 .anyRequest().permitAll(); // El resto de los enpoints son públicos
         return http.build();
