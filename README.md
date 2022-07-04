@@ -24,10 +24,16 @@ The programming language of this repository is Java 17.0.3.1.
 
 Other tools used in the development of the project:
 
-[https://app.diagrams.net/] - To draw the general structure of the project.
-[Maven] - Dependencies handler.
-[SpringBoot].
-[MySQL].
-[JUnit].
-[Postman].
+[https://app.diagrams.net/]. 
+
+[Maven] - Dependencies handler. 
+
+[SpringBoot]. 
+
+[MySQL]. 
+
+[JUnit]. 
+
+[Postman]. 
+
 
